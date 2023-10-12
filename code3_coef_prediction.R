@@ -1,5 +1,4 @@
 library(tidyverse)
-setwd("C:/Users/uadgw/デスクトップ/WorkingFiles/モデル群集/syncomR/deposit")
 source("./functions.R")
 
 int<-read_csv("data4_interactions.csv")
@@ -25,5 +24,3 @@ for(n in 2:6){
 }
 
 write.csv(cpred,"data5_coef_prediction.csv",row.names=F)
-
-
