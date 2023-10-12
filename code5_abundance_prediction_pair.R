@@ -1,6 +1,5 @@
 library(tidyverse)
 library(doParallel)
-setwd("C:/Users/uadgw/デスクトップ/WorkingFiles/モデル群集/syncomR/deposit")
 source("./functions.R")
 data<-read_csv("data1_rawcfu.csv") %>% mutate(cfu=log10(cfu))
 
