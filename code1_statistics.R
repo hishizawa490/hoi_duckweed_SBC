@@ -3,7 +3,6 @@ library(multcomp)
 library(agricolae)
 library(tidyverse)
 library(fitdistrplus)
-setwd("C:/Users/uadgw/デスクトップ/WorkingFiles/モデル群集/syncomR/deposit")
 source("./functions.R")
 data<-read_csv("data1_rawcfu.csv")
 
@@ -22,7 +21,6 @@ for(i in stnames){
   )
 }
 write.csv(res,"data2_model_fit.csv",row.names=FALSE)
-
 
 #Calculate fundamental statistics and multiple comparison test
 data<-data %>% mutate(cfu=log10(cfu)) %>% mutate(system=as.factor(system))
@@ -43,10 +41,7 @@ for(i in stnames){
 res<-res[,c(6,3,7,1,8,9,4,5,2)] %>% arrange(strain,nspecies,rev(system))
 write.csv(res,"data3_cfustats.csv",row.names=FALSE)
 
-
 #two-way ANOVA for the trio-based abundance prediction
-
 pred<-read_csv("data6_abundance_prediction_trio.csv") %>% filter(nspecies>=4) %>% mutate(error=abs(10^obs-10^pred))
 res<-aov(error~nspecies*strain,data=pred)
 summary(res)
-
