@@ -44,4 +44,5 @@ for(i in 1:100){
   }
   }
 }
+
 write.csv(result,"data9_abundance_prediction_sparse_6.csv",row.names=FALSE)
