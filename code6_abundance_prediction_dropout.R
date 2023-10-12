@@ -1,10 +1,8 @@
 library(tidyverse)
 library(doParallel)
-setwd("C:/Users/uadgw/デスクトップ/WorkingFiles/モデル群集/syncomR/deposit")
 source("./functions.R")
 data<-read_csv("data1_rawcfu.csv") %>% mutate(cfu=log10(cfu))
 stats<-read_csv("data3_cfustats.csv")
-
 sys3<-subsystem_all("s3612475",3,3)
 
 boot<-function(i){  
@@ -46,7 +44,6 @@ boot<-function(i){
   result$cfu
 }
 
-
 cl<-makeCluster(12,type="PSOCK")
 registerDoParallel(cl)
 res<-foreach(i = 1:100,.combine="cbind",.packages=c("tidyverse")) %dopar% (boot(i))
@@ -58,5 +55,3 @@ result<-tibble("strain"=rep(stnames,36),"n_3"=sort(rep(0:35,7)))
 result<-as_tibble(cbind(result,res,sd_pred))
 
 write.csv(result,"data8_abundance_prediction_sparse.csv",row.names=FALSE)
-
-
